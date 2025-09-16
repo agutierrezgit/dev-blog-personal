@@ -1,0 +1,164 @@
+---
+import Header from "../../components/Header.astro"
+import Layout from "../../layouts/Layout.astro"
+import ListItem from "../../components/ListItem.astro"
+
+interface Post {
+	title: string
+	description: string
+	date: string
+	href: string
+}
+
+const allPosts: Post[] = [
+	// 2024 Posts
+	{
+		title: "Building Modern Web Applications with Astro",
+		description: "A comprehensive guide to building fast, modern websites using Astro framework.",
+		date: "2024-12-15",
+		href: "/posts/modern-web-astro"
+	},
+	{
+		title: "AI-Powered Development Tools",
+		description: "How AI is transforming the way we write code and build applications.",
+		date: "2024-11-28",
+		href: "/posts/ai-development-tools"
+	},
+	{
+		title: "TypeScript Best Practices for Large Projects",
+		description: "Essential patterns and practices for maintaining TypeScript codebases at scale.",
+		date: "2024-10-10",
+		href: "/posts/typescript-best-practices"
+	},
+	{
+		title: "Getting started",
+		description: "Hit the ground running with this comprehensive starter guide.",
+		date: "2024-09-15",
+		href: "/posts/getting-started"
+	},
+	{
+		title: "Blog Collection",
+		description: "How to add posts to your blog and manage content effectively.",
+		date: "2024-08-22",
+		href: "/posts/blog-collection"
+	},
+	{
+		title: "Projects Collection",
+		description: "How to add projects to your portfolio and showcase your work.",
+		date: "2024-07-18",
+		href: "/posts/projects-collection"
+	},
+
+	// 2023 Posts
+	{
+		title: "The Future of Frontend Development",
+		description: "Exploring emerging trends and technologies shaping the future of web development.",
+		date: "2023-12-05",
+		href: "/posts/future-frontend-development"
+	},
+	{
+		title: "Optimizing Web Performance",
+		description: "Techniques and tools for building lightning-fast web applications.",
+		date: "2023-10-20",
+		href: "/posts/optimizing-web-performance"
+	},
+	{
+		title: "Introduction to Machine Learning for Developers",
+		description: "A beginner-friendly introduction to ML concepts for web developers.",
+		date: "2023-08-14",
+		href: "/posts/ml-for-developers"
+	},
+	{
+		title: "CSS Grid vs Flexbox: When to Use What",
+		description: "Understanding the differences and choosing the right layout method.",
+		date: "2023-06-30",
+		href: "/posts/css-grid-vs-flexbox"
+	},
+	{
+		title: "Building Responsive Interfaces",
+		description: "Best practices for creating interfaces that work on all devices.",
+		date: "2023-04-12",
+		href: "/posts/responsive-interfaces"
+	},
+
+	// 2022 Posts
+	{
+		title: "JavaScript Performance Optimization",
+		description: "Tips and tricks for writing faster, more efficient JavaScript code.",
+		date: "2022-11-25",
+		href: "/posts/js-performance-optimization"
+	},
+	{
+		title: "Modern CSS Techniques",
+		description: "Exploring modern CSS features and how to use them effectively.",
+		date: "2022-09-08",
+		href: "/posts/modern-css-techniques"
+	},
+	{
+		title: "Getting Started with React Hooks",
+		description: "A complete guide to understanding and using React Hooks.",
+		date: "2022-05-16",
+		href: "/posts/react-hooks-guide"
+	}
+]
+
+// Group posts by year
+const postsByYear = allPosts.reduce((acc, post) => {
+	const year = new Date(post.date).getFullYear().toString()
+	if (!acc[year]) {
+		acc[year] = []
+	}
+	acc[year].push(post)
+	return acc
+}, {} as Record<string, Post[]>)
+
+// Sort years in descending order
+const sortedYears = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
+
+// Sort posts within each year by date (newest first)
+sortedYears.forEach(year => {
+	postsByYear[year].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+})
+---
+
+<Layout title="All Posts - Ceadria">
+	<Header />
+	
+	<main class="max-w-4xl mx-auto px-6 py-12">
+		<!-- Header Section -->
+		<section class="mb-12">
+			<div class="mb-6">
+				<a href="/" class="text-blue-400 hover:text-blue-300 text-sm transition-colors inline-flex items-center">
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m0 0l8 8a1 1 0 010 1.414l-8 8z" />
+					</svg>
+					Back to home
+				</a>
+			</div>
+			<h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+				All Posts
+			</h1>
+			<p class="text-gray-400">
+				{allPosts.length} posts about frontend development, AI, and web technologies.
+			</p>
+		</section>
+
+		<!-- Posts by Year -->
+		{sortedYears.map(year => (
+			<section class="mb-12">
+				<h2 class="text-2xl font-bold text-white mb-6">
+					{year}
+				</h2>
+				<div class="space-y-2">
+					{postsByYear[year].map(post => (
+						<ListItem 
+							title={post.title}
+							description={post.description}
+							href={post.href}
+						/>
+					))}
+				</div>
+			</section>
+		))}
+	</main>
+</Layout>

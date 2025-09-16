@@ -1,0 +1,257 @@
+---
+import Header from "../../components/Header.astro"
+import Layout from "../../layouts/Layout.astro"
+
+export async function getStaticPaths() {
+	return [
+		// 2024 Posts
+		{ params: { slug: "modern-web-astro" } },
+		{ params: { slug: "ai-development-tools" } },
+		{ params: { slug: "typescript-best-practices" } },
+		{ params: { slug: "getting-started" } },
+		{ params: { slug: "blog-collection" } },
+		{ params: { slug: "projects-collection" } },
+		// 2023 Posts
+		{ params: { slug: "future-frontend-development" } },
+		{ params: { slug: "optimizing-web-performance" } },
+		{ params: { slug: "ml-for-developers" } },
+		{ params: { slug: "css-grid-vs-flexbox" } },
+		{ params: { slug: "responsive-interfaces" } },
+		// 2022 Posts
+		{ params: { slug: "js-performance-optimization" } },
+		{ params: { slug: "modern-css-techniques" } },
+		{ params: { slug: "react-hooks-guide" } },
+	]
+}
+
+interface PostData {
+	title: string
+	description: string
+	date: string
+	readTime: string
+	tags: string[]
+	content: string[]
+}
+
+const { slug } = Astro.params
+
+// Mock post data - in a real app this would come from a CMS or markdown files
+const postsData: Record<string, PostData> = {
+	"getting-started": {
+		title: "Getting Started",
+		description: "Hit the ground running with this comprehensive starter guide.",
+		date: "2024-09-15",
+		readTime: "5 min read",
+		tags: ["Guide", "Beginner", "Setup"],
+		content: [
+			"Welcome to this comprehensive getting started guide! This post will help you hit the ground running with modern web development practices.",
+			"## What You'll Learn",
+			"In this guide, we'll cover the essential concepts and tools you need to begin your journey in modern web development. We'll explore best practices, common pitfalls to avoid, and practical tips that will save you time.",
+			"## Prerequisites",
+			"Before we dive in, make sure you have the following installed on your system:",
+			"- Node.js (version 18 or higher)",
+			"- A code editor like VS Code",
+			"- Git for version control",
+			"- Basic understanding of HTML, CSS, and JavaScript",
+			"## Setting Up Your Environment",
+			"The first step is to set up a proper development environment. This includes configuring your editor with the right extensions, setting up a project structure, and understanding the tools that will make your development process smoother.",
+			"## Next Steps",
+			"Once you've completed this guide, you'll be ready to start building modern web applications. The concepts covered here will serve as a foundation for more advanced topics we'll explore in future posts.",
+			"Remember, the key to mastering web development is practice and staying curious about new technologies and approaches."
+		]
+	},
+	"modern-web-astro": {
+		title: "Building Modern Web Applications with Astro",
+		description: "A comprehensive guide to building fast, modern websites using Astro framework.",
+		date: "2024-12-15",
+		readTime: "8 min read",
+		tags: ["Astro", "Performance", "SSG"],
+		content: [
+			"Astro has revolutionized how we think about building modern web applications. With its unique approach to partial hydration and component islands, it offers unparalleled performance while maintaining developer experience.",
+			"## Why Choose Astro?",
+			"Astro stands out from other frameworks because it delivers HTML by default, only shipping JavaScript when necessary. This results in faster loading times and better Core Web Vitals scores.",
+			"## Key Features",
+			"- **Component Islands**: Load interactive components only when needed",
+			"- **Framework Agnostic**: Use React, Vue, Svelte, or any other framework",
+			"- **Built-in Optimizations**: Automatic image optimization, CSS bundling, and more",
+			"- **Developer Experience**: Hot module replacement, TypeScript support out of the box",
+			"## Getting Started with Astro",
+			"Setting up a new Astro project is straightforward. The CLI provides various templates to choose from, whether you're building a blog, portfolio, or complex application.",
+			"## Performance Benefits",
+			"One of Astro's biggest advantages is its performance. By default, Astro sites are fast because they ship minimal JavaScript. Interactive components are only hydrated when they become visible or when user interaction is detected.",
+			"## Best Practices",
+			"When building with Astro, follow these best practices for optimal results:",
+			"- Use static generation whenever possible",
+			"- Leverage component islands for interactive features",
+			"- Optimize your images using Astro's built-in image optimization",
+			"- Take advantage of Astro's built-in CSS handling"
+		]
+	},
+	"ai-development-tools": {
+		title: "AI-Powered Development Tools",
+		description: "How AI is transforming the way we write code and build applications.",
+		date: "2024-11-28",
+		readTime: "6 min read",
+		tags: ["AI", "Tools", "Productivity"],
+		content: [
+			"Artificial Intelligence is fundamentally changing how developers write code, debug applications, and solve complex problems. The tools available today are just the beginning of this transformation.",
+			"## The Current Landscape",
+			"AI-powered development tools have evolved from simple autocomplete suggestions to sophisticated code generation and debugging assistants. These tools are becoming integral parts of the modern developer's toolkit.",
+			"## Code Generation and Completion",
+			"Tools like GitHub Copilot, TabNine, and ChatGPT have made code generation more accessible than ever. They can understand context, suggest entire functions, and even help with architecture decisions.",
+			"## Debugging and Error Resolution",
+			"AI tools excel at pattern recognition, making them particularly useful for debugging. They can analyze stack traces, suggest fixes, and even explain complex error messages in plain English.",
+			"## Code Review and Quality Assurance",
+			"Automated code review tools powered by AI can catch potential bugs, security vulnerabilities, and code style issues before they make it to production.",
+			"## The Future of AI in Development",
+			"As AI continues to evolve, we can expect even more sophisticated tools that understand entire codebases, can refactor code intelligently, and help with system design decisions.",
+			"## Embracing AI While Maintaining Skills",
+			"While AI tools are incredibly powerful, it's important to use them as aids rather than replacements for fundamental programming skills. Understanding how to write good code is still essential."
+		]
+	},
+	"typescript-best-practices": {
+		title: "TypeScript Best Practices for Large Projects",
+		description: "Essential patterns and practices for maintaining TypeScript codebases at scale.",
+		date: "2024-10-10",
+		readTime: "10 min read",
+		tags: ["TypeScript", "Best Practices", "Architecture"],
+		content: [
+			"TypeScript has become the de facto standard for large-scale JavaScript applications. However, managing TypeScript in large projects requires careful planning and adherence to best practices.",
+			"## Project Structure and Organization",
+			"A well-organized project structure is crucial for maintainability. Separate your types, utilities, and business logic into distinct modules with clear boundaries.",
+			"## Type Safety Strategies",
+			"Maximize type safety by avoiding 'any' types, using strict compiler options, and leveraging TypeScript's advanced type system features like conditional types and mapped types.",
+			"## Configuration Management",
+			"Properly configure your tsconfig.json with strict settings, appropriate target versions, and path mapping for cleaner imports.",
+			"## Code Organization Patterns",
+			"Use barrel exports, establish clear module boundaries, and follow consistent naming conventions throughout your codebase.",
+			"## Performance Considerations",
+			"Large TypeScript projects can suffer from slow compilation times. Learn strategies for optimizing build performance and using project references effectively.",
+			"## Testing TypeScript Code",
+			"Ensure your types are correct with techniques like type-only tests and runtime validation using libraries like Zod or io-ts.",
+			"## Refactoring and Migration",
+			"When working with existing codebases, gradual migration strategies and automated refactoring tools can help maintain momentum while improving type safety."
+		]
+	}
+}
+
+// Get the current post data
+const postData = postsData[slug as string]
+
+// If post doesn't exist, return 404
+if (!postData) {
+	return Astro.redirect('/404')
+}
+
+// Format date
+const formatDate = (dateString: string) => {
+	const date = new Date(dateString)
+	return date.toLocaleDateString('en-US', { 
+		year: 'numeric', 
+		month: 'long', 
+		day: 'numeric' 
+	})
+}
+---
+
+<Layout title={`${postData.title} - Ceadria`}>
+	<Header />
+	
+	<main class="max-w-4xl mx-auto px-6 py-12">
+		<!-- Navigation -->
+		<nav class="mb-8">
+			<a href="/posts" class="text-blue-400 hover:text-blue-300 text-sm transition-colors inline-flex items-center">
+				<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m0 0l8 8a1 1 0 010 1.414l-8 8z" />
+				</svg>
+				Back to posts
+			</a>
+		</nav>
+
+		<!-- Post Header -->
+		<article class="prose prose-invert prose-lg max-w-none">
+			<header class="mb-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+					{postData.title}
+				</h1>
+				
+				<div class="flex flex-wrap items-center gap-4 text-gray-400 text-sm mb-6">
+					<time datetime={postData.date}>
+						{formatDate(postData.date)}
+					</time>
+					<span>•</span>
+					<span>{postData.readTime}</span>
+				</div>
+
+				<div class="flex flex-wrap gap-2 mb-8">
+					{postData.tags.map(tag => (
+						<span class="bg-gray-800/50 text-gray-300 px-3 py-1 rounded-full text-sm">
+							{tag}
+						</span>
+					))}
+				</div>
+
+				<p class="text-xl text-gray-300 leading-relaxed">
+					{postData.description}
+				</p>
+			</header>
+
+			<!-- Post Content -->
+			<div class="space-y-6">
+				{postData.content.map(paragraph => {
+					if (paragraph.startsWith('## ')) {
+						return (
+							<h2 class="text-2xl font-bold text-white mt-12 mb-6">
+								{paragraph.replace('## ', '')}
+							</h2>
+						)
+					}
+					if (paragraph.startsWith('- ')) {
+						return (
+							<li class="text-gray-300 leading-relaxed ml-6">
+								{paragraph.replace('- ', '')}
+							</li>
+						)
+					}
+					return (
+						<p class="text-gray-300 leading-relaxed">
+							{paragraph}
+						</p>
+					)
+				})}
+			</div>
+		</article>
+
+		<!-- Post Footer -->
+		<footer class="mt-16 pt-8 border-t border-gray-800">
+			<div class="flex justify-between items-center">
+				<a href="/posts" class="text-blue-400 hover:text-blue-300 text-sm transition-colors inline-flex items-center">
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m0 0l8 8a1 1 0 010 1.414l-8 8z" />
+					</svg>
+					Back to all posts
+				</a>
+				<div class="text-gray-400 text-sm">
+					Thanks for reading!
+				</div>
+			</div>
+		</footer>
+	</main>
+</Layout>
+
+<style>
+	/* Custom prose styles for better readability */
+	.prose {
+		color: #d1d5db;
+	}
+	.prose h2 {
+		border-bottom: 1px solid #374151;
+		padding-bottom: 0.5rem;
+	}
+	.prose p {
+		margin-bottom: 1.5rem;
+	}
+	.prose li {
+		margin-bottom: 0.5rem;
+	}
+</style>

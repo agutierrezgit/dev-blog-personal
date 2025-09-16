@@ -1,0 +1,621 @@
+---
+import Header from "../../components/Header.astro"
+import Layout from "../../layouts/Layout.astro"
+
+export async function getStaticPaths() {
+	return [
+		// Web Framework
+		{ params: { slug: "astro-nano" } },
+		{ params: { slug: "astro-sphere" } },
+		// Web Applications
+		{ params: { slug: "react-dashboard-pro" } },
+		{ params: { slug: "ecommerce-platform" } },
+		// AI/ML
+		{ params: { slug: "ai-content-generator" } },
+		{ params: { slug: "smart-code-assistant" } },
+		// Mobile
+		{ params: { slug: "task-manager-mobile" } },
+		{ params: { slug: "fitness-tracker" } },
+		// Open Source
+		{ params: { slug: "typescript-utils" } },
+		{ params: { slug: "react-hooks-collection" } },
+	]
+}
+
+interface ProjectData {
+	title: string
+	description: string
+	longDescription: string[]
+	category: string
+	year: number
+	status: "completed" | "in-progress" | "archived"
+	technologies: string[]
+	features: string[]
+	links: {
+		demo?: string
+		github?: string
+		npm?: string
+		website?: string
+	}
+	challenges: string[]
+	outcomes: string[]
+}
+
+const { slug } = Astro.params
+
+// Mock project data - in a real app this would come from a CMS or markdown files
+const projectsData: Record<string, ProjectData> = {
+	"astro-nano": {
+		title: "Astro Nano",
+		description: "Minimal portfolio and blog built with Astro and no frameworks.",
+		longDescription: [
+		"This is a lightweight, minimalist portfolio and blog template designed for developers who value performance and simplicity. Built entirely with Astro, it achieves perfect Lighthouse scores while maintaining a clean, professional aesthetic.",
+			"The project emphasizes zero JavaScript by default, leveraging Astro's static site generation capabilities to deliver blazing-fast loading times. The template is designed to be easily customizable while maintaining its minimal footprint.",
+			"With built-in support for markdown blogs, optimized images, and SEO best practices, this template provides everything needed for a modern developer portfolio without the complexity of traditional frameworks."
+		],
+		category: "Web Framework",
+		year: 2024,
+		status: "completed",
+		technologies: ["Astro", "TypeScript", "TailwindCSS", "Markdown", "Vite"],
+		features: [
+			"Perfect Lighthouse scores (100/100/100/100)",
+			"Zero JavaScript by default",
+			"Markdown blog support",
+			"Automatic image optimization",
+			"SEO-friendly structure",
+			"Dark/light theme support",
+			"Responsive design",
+			"Fast build times"
+		],
+		links: {
+			demo: "https://astro-nano-demo.vercel.app",
+			github: "https://github.com/username/astro-nano",
+			website: "https://astro-nano.dev"
+		},
+		challenges: [
+			"Achieving perfect Lighthouse scores while maintaining design flexibility",
+			"Implementing theme switching without JavaScript hydration",
+			"Optimizing build performance for large content collections"
+		],
+		outcomes: [
+			"Achieved sub-1s loading times on all devices",
+			"Gained 500+ GitHub stars within first month",
+			"Used as template by 100+ developers"
+		]
+	},
+	"react-dashboard-pro": {
+		title: "React Dashboard Pro",
+		description: "Advanced analytics dashboard with real-time data visualization and interactive charts.",
+		longDescription: [
+			"React Dashboard Pro is a comprehensive analytics platform built for modern businesses that need real-time insights into their data. The dashboard features interactive charts, customizable widgets, and real-time data streaming capabilities.",
+			"Built with React 18 and leveraging the latest features like Suspense and concurrent rendering, the dashboard maintains smooth performance even when handling thousands of data points simultaneously.",
+			"The project implements a modular architecture with reusable chart components, making it easy to extend and customize for different use cases."
+		],
+		category: "Web Application",
+		year: 2024,
+		status: "completed",
+		technologies: ["React", "TypeScript", "D3.js", "WebSocket", "Node.js", "PostgreSQL", "Redis"],
+		features: [
+			"Real-time data streaming",
+			"Interactive charts and graphs",
+			"Customizable dashboard layouts",
+			"Advanced filtering and search",
+			"Data export capabilities",
+			"Multi-tenant support",
+			"Role-based access control",
+			"Mobile responsive design"
+		],
+		links: {
+			demo: "https://dashboard-pro-demo.com",
+			github: "https://github.com/username/react-dashboard-pro"
+		},
+		challenges: [
+			"Managing real-time data updates without performance degradation",
+			"Implementing complex data visualizations with D3.js",
+			"Optimizing for large datasets (1M+ records)"
+		],
+		outcomes: [
+			"Reduced data analysis time by 70%",
+			"Handles 10k+ concurrent users",
+			"Deployed to 50+ enterprise clients"
+		]
+	},
+	"ai-content-generator": {
+		title: "AI Content Generator",
+		description: "Machine learning powered content generation tool for blog posts and articles.",
+		longDescription: [
+			"AI Content Generator is an intelligent writing assistant that leverages cutting-edge language models to help content creators generate high-quality articles, blog posts, and marketing copy.",
+			"The tool integrates with multiple AI providers including OpenAI GPT-4, Claude, and custom fine-tuned models to provide diverse writing styles and approaches based on user preferences.",
+			"Features include content planning, SEO optimization suggestions, fact-checking integration, and collaborative editing capabilities."
+		],
+		category: "AI/ML",
+		year: 2024,
+		status: "in-progress",
+		technologies: ["Python", "FastAPI", "OpenAI API", "React", "PostgreSQL", "Redis", "Docker"],
+		features: [
+			"Multi-model AI integration",
+			"Content planning and outlining",
+			"SEO optimization suggestions",
+			"Plagiarism detection",
+			"Multiple writing styles",
+			"Collaborative editing",
+			"Version control for content",
+			"Analytics and insights"
+		],
+		links: {
+			demo: "https://ai-content-gen-demo.com"
+		},
+		challenges: [
+			"Balancing content quality with generation speed",
+			"Implementing effective prompt engineering",
+			"Managing API costs across multiple providers"
+		],
+		outcomes: [
+			"Generated 10k+ articles for beta users",
+			"Achieved 85% user satisfaction rating",
+			"Reduced content creation time by 60%"
+		]
+	},
+	"typescript-utils": {
+		title: "TypeScript Utils Library",
+		description: "Collection of useful TypeScript utilities and types for modern web development.",
+		longDescription: [
+			"TypeScript Utils is a comprehensive library of utility types, functions, and helpers designed to enhance TypeScript development experience. The library focuses on type safety, developer ergonomics, and runtime performance.",
+			"All utilities are thoroughly tested and documented, with examples and use cases provided for each function. The library follows semantic versioning and maintains backward compatibility.",
+			"The project has grown to include over 100 utility functions covering areas like object manipulation, array operations, string processing, and advanced type transformations."
+		],
+		category: "Open Source",
+		year: 2024,
+		status: "completed",
+		technologies: ["TypeScript", "Jest", "ESBuild", "GitHub Actions", "NPM"],
+		features: [
+			"100+ utility functions",
+			"Full TypeScript support",
+			"Tree-shakeable modules",
+			"Comprehensive test coverage",
+			"Detailed documentation",
+			"Zero dependencies",
+			"ESM and CommonJS support",
+			"Automated releases"
+		],
+		links: {
+			github: "https://github.com/username/typescript-utils",
+			npm: "https://npmjs.com/package/@username/typescript-utils",
+			website: "https://typescript-utils.dev"
+		},
+		challenges: [
+			"Maintaining type safety across complex utility functions",
+			"Ensuring optimal bundle size for all utilities",
+			"Providing comprehensive documentation for complex types"
+		],
+		outcomes: [
+			"1M+ monthly NPM downloads",
+			"Used by 500+ companies",
+			"Featured in TypeScript community newsletter"
+		]
+	},
+	"astro-sphere": {
+		title: "Astro Sphere",
+		description: "Portfolio and blog built with Astro.",
+		longDescription: [
+			"Astro Sphere is a modern portfolio and blog template designed for creative professionals and developers. It combines beautiful design with excellent performance, built entirely with Astro.",
+			"The template features smooth animations, dark mode support, and a content management system that makes it easy to add new portfolio pieces and blog posts.",
+			"With its focus on visual storytelling and clean typography, Astro Sphere is perfect for showcasing creative work and professional achievements."
+		],
+		category: "Web Framework",
+		year: 2024,
+		status: "completed",
+		technologies: ["Astro", "TypeScript", "SCSS", "Framer Motion", "MDX"],
+		features: [
+			"Beautiful animations and transitions",
+			"Dark/light theme support",
+			"Portfolio showcase",
+			"Blog with MDX support",
+			"Contact form integration",
+			"SEO optimized",
+			"Mobile responsive",
+			"Fast loading times"
+		],
+		links: {
+			demo: "https://astro-sphere-demo.vercel.app",
+			github: "https://github.com/username/astro-sphere"
+		},
+		challenges: [
+			"Creating smooth animations without impacting performance",
+			"Balancing visual appeal with fast loading times",
+			"Implementing complex layout transitions"
+		],
+		outcomes: [
+			"Downloaded 5k+ times from GitHub",
+			"Featured on Astro community showcase",
+			"Used by creative agencies and freelancers"
+		]
+	},
+	"ecommerce-platform": {
+		title: "E-commerce Platform",
+		description: "Full-stack e-commerce solution with payment integration and inventory management.",
+		longDescription: [
+			"A comprehensive e-commerce platform built to handle everything from product catalog management to payment processing and order fulfillment. Designed for scalability and performance.",
+			"The platform includes advanced features like inventory management, multi-vendor support, analytics dashboard, and integration with popular payment gateways.",
+			"Built with modern technologies and cloud-native architecture, it can handle thousands of concurrent users and processes millions of transactions."
+		],
+		category: "Web Application",
+		year: 2023,
+		status: "completed",
+		technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Stripe", "AWS", "Docker"],
+		features: [
+			"Product catalog management",
+			"Shopping cart and checkout",
+			"Payment gateway integration",
+			"Inventory management",
+			"Order tracking",
+			"Admin dashboard",
+			"Multi-vendor support",
+			"Analytics and reporting"
+		],
+		links: {
+			demo: "https://ecommerce-demo.com",
+			github: "https://github.com/username/ecommerce-platform"
+		},
+		challenges: [
+			"Handling high-volume transactions securely",
+			"Implementing real-time inventory updates",
+			"Optimizing for mobile commerce"
+		],
+		outcomes: [
+			"Processed $2M+ in transactions",
+			"Serving 100+ active merchants",
+			"99.9% uptime during peak seasons"
+		]
+	},
+	"smart-code-assistant": {
+		title: "Smart Code Assistant",
+		description: "VSCode extension that provides intelligent code suggestions using GPT models.",
+		longDescription: [
+			"A powerful VSCode extension that integrates AI-powered code assistance directly into the development environment. It provides context-aware suggestions, code explanations, and automated refactoring.",
+			"The extension uses advanced language models to understand your codebase and provide intelligent suggestions that match your coding style and project patterns.",
+			"Features include real-time code analysis, bug detection, performance optimization suggestions, and automated documentation generation."
+		],
+		category: "AI/ML",
+		year: 2023,
+		status: "completed",
+		technologies: ["TypeScript", "VSCode API", "OpenAI API", "Node.js", "Webpack"],
+		features: [
+			"Context-aware code suggestions",
+			"Automated code reviews",
+			"Bug detection and fixes",
+			"Performance optimization",
+			"Code documentation generation",
+			"Refactoring assistance",
+			"Multi-language support",
+			"Team collaboration features"
+		],
+		links: {
+			github: "https://github.com/username/smart-code-assistant",
+			website: "https://marketplace.visualstudio.com/items?itemName=username.smart-code-assistant"
+		},
+		challenges: [
+			"Optimizing AI response times for real-time suggestions",
+			"Managing API rate limits effectively",
+			"Ensuring code security and privacy"
+		],
+		outcomes: [
+			"50k+ active users",
+			"4.8/5 rating on VSCode marketplace",
+			"Reduced development time by 30% for users"
+		]
+	},
+	"task-manager-mobile": {
+		title: "Task Manager Mobile",
+		description: "Cross-platform mobile app for task and project management with offline sync.",
+		longDescription: [
+			"A comprehensive mobile application for task and project management, designed for teams and individuals who need to stay organized on the go. Built with React Native for cross-platform compatibility.",
+			"The app features offline synchronization, collaborative task management, time tracking, and project analytics. It seamlessly syncs across all devices when internet connection is available.",
+			"With its intuitive interface and powerful features, the app helps users increase productivity and maintain better work-life balance."
+		],
+		category: "Mobile",
+		year: 2023,
+		status: "completed",
+		technologies: ["React Native", "TypeScript", "Redux", "SQLite", "Firebase", "Expo"],
+		features: [
+			"Cross-platform compatibility",
+			"Offline synchronization",
+			"Task and project management",
+			"Time tracking",
+			"Team collaboration",
+			"Push notifications",
+			"Data analytics",
+			"Dark mode support"
+		],
+		links: {
+			demo: "https://task-manager-demo.com",
+			github: "https://github.com/username/task-manager-mobile"
+		},
+		challenges: [
+			"Implementing reliable offline synchronization",
+			"Optimizing performance for low-end devices",
+			"Handling real-time collaboration conflicts"
+		],
+		outcomes: [
+			"10k+ downloads across iOS and Android",
+			"4.5/5 average rating on app stores",
+			"Used by 50+ companies for team management"
+		]
+	},
+	"fitness-tracker": {
+		title: "Fitness Tracker",
+		description: "React Native app for tracking workouts and health metrics with Apple Health integration.",
+		longDescription: [
+			"A comprehensive fitness tracking application that helps users monitor their health and fitness goals. The app integrates with Apple Health and Google Fit to provide a complete wellness picture.",
+			"Features include workout tracking, nutrition logging, progress analytics, and social features to keep users motivated and engaged in their fitness journey.",
+			"The app was designed with user privacy in mind, storing sensitive health data securely and giving users full control over their information."
+		],
+		category: "Mobile",
+		year: 2022,
+		status: "archived",
+		technologies: ["React Native", "TypeScript", "Apple Health", "Google Fit", "Chart.js", "AsyncStorage"],
+		features: [
+			"Workout tracking",
+			"Nutrition logging",
+			"Progress analytics",
+			"Health integration",
+			"Social features",
+			"Goal setting",
+			"Achievement system",
+			"Data export"
+		],
+		links: {
+			github: "https://github.com/username/fitness-tracker"
+		},
+		challenges: [
+			"Integrating with multiple health platforms",
+			"Ensuring data accuracy across different devices",
+			"Maintaining user privacy and security"
+		],
+		outcomes: [
+			"5k+ beta users",
+			"Featured in health tech newsletter",
+			"Led to consulting opportunities"
+		]
+	},
+	"react-hooks-collection": {
+		title: "React Hooks Collection",
+		description: "Comprehensive collection of custom React hooks for common use cases.",
+		longDescription: [
+			"A well-documented collection of custom React hooks designed to solve common problems in React applications. Each hook is thoroughly tested and optimized for performance.",
+			"The collection includes hooks for state management, API calls, form handling, animations, and utility functions that make React development more efficient and enjoyable.",
+			"All hooks follow React best practices and are designed to be reusable across different projects and use cases."
+		],
+		category: "Open Source",
+		year: 2023,
+		status: "completed",
+		technologies: ["React", "TypeScript", "Jest", "React Testing Library", "Rollup", "NPM"],
+		features: [
+			"50+ custom hooks",
+			"Full TypeScript support",
+			"Comprehensive testing",
+			"Detailed documentation",
+			"Tree-shakeable",
+			"Zero dependencies",
+			"SSR compatible",
+			"Performance optimized"
+		],
+		links: {
+			github: "https://github.com/username/react-hooks-collection",
+			npm: "https://npmjs.com/package/@username/react-hooks-collection",
+			website: "https://react-hooks-collection.dev"
+		},
+		challenges: [
+			"Ensuring hooks work across different React versions",
+			"Optimizing performance for all use cases",
+			"Maintaining backward compatibility"
+		],
+		outcomes: [
+			"500k+ monthly NPM downloads",
+			"Used in 1000+ projects",
+			"Contributions from 20+ developers"
+		]
+	}
+}
+
+// Get the current project data
+const projectData = projectsData[slug as string]
+
+// If project doesn't exist, return 404
+if (!projectData) {
+	return Astro.redirect('/404')
+}
+
+// Get status badge style
+const getStatusStyle = (status: ProjectData['status']) => {
+	switch (status) {
+		case 'completed':
+			return 'bg-green-800/30 text-green-300 border-green-700/50'
+		case 'in-progress':
+			return 'bg-blue-800/30 text-blue-300 border-blue-700/50'
+		case 'archived':
+			return 'bg-gray-800/30 text-gray-400 border-gray-700/50'
+	}
+}
+
+const getStatusText = (status: ProjectData['status']) => {
+	switch (status) {
+		case 'completed':
+			return 'Completed'
+		case 'in-progress':
+			return 'In Progress'
+		case 'archived':
+			return 'Archived'
+	}
+}
+---
+
+<Layout title={`${projectData.title} - Ceadria`}>
+	<Header />
+	
+	<main class="max-w-4xl mx-auto px-6 py-12">
+		<!-- Navigation -->
+		<nav class="mb-8">
+			<a href="/projects" class="text-blue-400 hover:text-blue-300 text-sm transition-colors inline-flex items-center">
+				<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m0 0l8 8a1 1 0 010 1.414l-8 8z" />
+				</svg>
+				Back to projects
+			</a>
+		</nav>
+
+		<!-- Project Header -->
+		<header class="mb-12">
+			<div class="flex items-start justify-between mb-6">
+				<div class="flex-1">
+					<h1 class="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+						{projectData.title}
+					</h1>
+					<p class="text-xl text-gray-300 leading-relaxed mb-6">
+						{projectData.description}
+					</p>
+				</div>
+			</div>
+
+			<div class="flex flex-wrap items-center gap-4 mb-8">
+				<span class={`px-3 py-1 text-sm rounded border ${getStatusStyle(projectData.status)}`}>
+					{getStatusText(projectData.status)}
+				</span>
+				<span class="text-gray-400 text-sm">
+					{projectData.category} • {projectData.year}
+				</span>
+			</div>
+
+			<!-- Project Links -->
+			{Object.keys(projectData.links).length > 0 && (
+				<div class="flex flex-wrap gap-3 mb-8">
+					{projectData.links.demo && (
+						<a href={projectData.links.demo} target="_blank" rel="noopener noreferrer" 
+							class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+							<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+							</svg>
+							Live Demo
+						</a>
+					)}
+					{projectData.links.github && (
+						<a href={projectData.links.github} target="_blank" rel="noopener noreferrer"
+							class="inline-flex items-center bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors text-sm">
+							<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+							</svg>
+							GitHub
+						</a>
+					)}
+					{projectData.links.website && (
+						<a href={projectData.links.website} target="_blank" rel="noopener noreferrer"
+							class="inline-flex items-center bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm">
+							<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5.025 0-9.025-4.025-9.025-9.025S6.975 2.975 12 2.975"/>
+							</svg>
+							Website
+						</a>
+					)}
+					{projectData.links.npm && (
+						<a href={projectData.links.npm} target="_blank" rel="noopener noreferrer"
+							class="inline-flex items-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm">
+							<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M0 7.334v8h6.666v1.332H12v-1.332h12v-8H0zm6.666 6.664H5.334v-4H3.999v4H1.335V8.667h5.331v5.331zm4 0v1.336H8.001V8.667h2.665v5.331zm12 0h-1.334v-4h-1.332v4h-1.336v-4h-1.332v4H16v-5.331h6.666v5.331z"/>
+							</svg>
+							NPM
+						</a>
+					)}
+				</div>
+			)}
+		</header>
+
+		<!-- Project Content -->
+		<div class="space-y-12">
+			<!-- Description -->
+			<section>
+				<h2 class="text-2xl font-bold text-white mb-6">About This Project</h2>
+				<div class="space-y-4">
+					{projectData.longDescription.map(paragraph => (
+						<p class="text-gray-300 leading-relaxed">{paragraph}</p>
+					))}
+				</div>
+			</section>
+
+			<!-- Technologies -->
+			<section>
+				<h2 class="text-2xl font-bold text-white mb-6">Technologies Used</h2>
+				<div class="flex flex-wrap gap-2">
+					{projectData.technologies.map(tech => (
+						<span class="bg-gray-800/50 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700/50">
+							{tech}
+						</span>
+					))}
+				</div>
+			</section>
+
+			<!-- Key Features -->
+			<section>
+				<h2 class="text-2xl font-bold text-white mb-6">Key Features</h2>
+				<ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+					{projectData.features.map(feature => (
+						<li class="flex items-center text-gray-300">
+							<svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+							</svg>
+							{feature}
+						</li>
+					))}
+				</ul>
+			</section>
+
+			<!-- Challenges & Solutions -->
+			{projectData.challenges.length > 0 && (
+				<section>
+					<h2 class="text-2xl font-bold text-white mb-6">Challenges & Solutions</h2>
+					<ul class="space-y-3">
+						{projectData.challenges.map(challenge => (
+							<li class="flex items-start text-gray-300">
+								<svg class="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z" />
+								</svg>
+								{challenge}
+							</li>
+						))}
+					</ul>
+				</section>
+			)}
+
+			<!-- Outcomes -->
+			{projectData.outcomes.length > 0 && (
+				<section>
+					<h2 class="text-2xl font-bold text-white mb-6">Results & Impact</h2>
+					<ul class="space-y-3">
+						{projectData.outcomes.map(outcome => (
+							<li class="flex items-start text-gray-300">
+								<svg class="w-5 h-5 text-blue-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+								</svg>
+								{outcome}
+							</li>
+						))}
+					</ul>
+				</section>
+			)}
+		</div>
+
+		<!-- Project Footer -->
+		<footer class="mt-16 pt-8 border-t border-gray-800">
+			<div class="flex justify-between items-center">
+				<a href="/projects" class="text-blue-400 hover:text-blue-300 text-sm transition-colors inline-flex items-center">
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m0 0l8 8a1 1 0 010 1.414l-8 8z" />
+					</svg>
+					Back to all projects
+				</a>
+				<div class="text-gray-400 text-sm">
+					Interested in collaborating? Let's connect!
+				</div>
+			</div>
+		</footer>
+	</main>
+</Layout>

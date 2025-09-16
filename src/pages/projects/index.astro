@@ -1,0 +1,241 @@
+---
+import Header from "../../components/Header.astro"
+import Layout from "../../layouts/Layout.astro"
+import ListItem from "../../components/ListItem.astro"
+
+interface Project {
+	title: string
+	description: string
+	category: string
+	year: number
+	href: string
+	status: "completed" | "in-progress" | "archived"
+}
+
+const allProjects: Project[] = [
+	// Web Applications
+	{
+		title: "Astro Nano",
+		description: "Minimal portfolio and blog build with astro and no frameworks.",
+		category: "Web Framework",
+		year: 2024,
+		href: "/projects/astro-nano",
+		status: "completed"
+	},
+	{
+		title: "Astro Sphere", 
+		description: "Portfolio and blog build with astro.",
+		category: "Web Framework",
+		year: 2024,
+		href: "/projects/astro-sphere",
+		status: "completed"
+	},
+	{
+		title: "React Dashboard Pro",
+		description: "Advanced analytics dashboard with real-time data visualization and interactive charts.",
+		category: "Web Application",
+		year: 2024,
+		href: "/projects/react-dashboard-pro",
+		status: "completed"
+	},
+	{
+		title: "E-commerce Platform",
+		description: "Full-stack e-commerce solution with payment integration and inventory management.",
+		category: "Web Application",
+		year: 2023,
+		href: "/projects/ecommerce-platform",
+		status: "completed"
+	},
+	
+	// AI/ML Projects
+	{
+		title: "AI Content Generator",
+		description: "Machine learning powered content generation tool for blog posts and articles.",
+		category: "AI/ML",
+		year: 2024,
+		href: "/projects/ai-content-generator",
+		status: "in-progress"
+	},
+	{
+		title: "Smart Code Assistant",
+		description: "VSCode extension that provides intelligent code suggestions using GPT models.",
+		category: "AI/ML",
+		year: 2023,
+		href: "/projects/smart-code-assistant",
+		status: "completed"
+	},
+	
+	// Mobile Apps
+	{
+		title: "Task Manager Mobile",
+		description: "Cross-platform mobile app for task and project management with offline sync.",
+		category: "Mobile",
+		year: 2023,
+		href: "/projects/task-manager-mobile",
+		status: "completed"
+	},
+	{
+		title: "Fitness Tracker",
+		description: "React Native app for tracking workouts and health metrics with Apple Health integration.",
+		category: "Mobile",
+		year: 2022,
+		href: "/projects/fitness-tracker",
+		status: "archived"
+	},
+	
+	// Open Source
+	{
+		title: "TypeScript Utils Library",
+		description: "Collection of useful TypeScript utilities and types for modern web development.",
+		category: "Open Source",
+		year: 2024,
+		href: "/projects/typescript-utils",
+		status: "completed"
+	},
+	{
+		title: "React Hooks Collection",
+		description: "Comprehensive collection of custom React hooks for common use cases.",
+		category: "Open Source",
+		year: 2023,
+		href: "/projects/react-hooks-collection",
+		status: "completed"
+	}
+]
+
+// Group projects by category
+const projectsByCategory = allProjects.reduce((acc, project) => {
+	if (!acc[project.category]) {
+		acc[project.category] = []
+	}
+	acc[project.category].push(project)
+	return acc
+}, {} as Record<string, Project[]>)
+
+// Sort categories and projects within each category
+const sortedCategories = Object.keys(projectsByCategory).sort()
+sortedCategories.forEach(category => {
+	projectsByCategory[category].sort((a, b) => b.year - a.year)
+})
+
+// Get status badge style
+const getStatusStyle = (status: Project['status']) => {
+	switch (status) {
+		case 'completed':
+			return 'bg-green-800/30 text-green-300 border-green-700/50'
+		case 'in-progress':
+			return 'bg-blue-800/30 text-blue-300 border-blue-700/50'
+		case 'archived':
+			return 'bg-gray-800/30 text-gray-400 border-gray-700/50'
+	}
+}
+
+const getStatusText = (status: Project['status']) => {
+	switch (status) {
+		case 'completed':
+			return 'Completed'
+		case 'in-progress':
+			return 'In Progress'
+		case 'archived':
+			return 'Archived'
+	}
+}
+---
+
+<Layout title="All Projects - Ceadria">
+	<Header />
+	
+	<main class="max-w-4xl mx-auto px-6 py-12">
+		<!-- Header Section -->
+		<section class="mb-12">
+			<div class="mb-6">
+				<a href="/" class="text-blue-400 hover:text-blue-300 text-sm transition-colors inline-flex items-center">
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m0 0l8 8a1 1 0 010 1.414l-8 8z" />
+					</svg>
+					Back to home
+				</a>
+			</div>
+			<h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+				All Projects
+			</h1>
+			<p class="text-gray-400">
+				{allProjects.length} projects across web development, AI/ML, mobile apps, and open source.
+			</p>
+		</section>
+
+		<!-- Project Statistics -->
+		<section class="mb-12">
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+				<div class="bg-gray-800/30 rounded-lg p-4 text-center">
+					<div class="text-2xl font-bold text-white">
+						{allProjects.filter(p => p.status === 'completed').length}
+					</div>
+					<div class="text-sm text-gray-400">Completed</div>
+				</div>
+				<div class="bg-gray-800/30 rounded-lg p-4 text-center">
+					<div class="text-2xl font-bold text-blue-400">
+						{allProjects.filter(p => p.status === 'in-progress').length}
+					</div>
+					<div class="text-sm text-gray-400">In Progress</div>
+				</div>
+				<div class="bg-gray-800/30 rounded-lg p-4 text-center">
+					<div class="text-2xl font-bold text-green-400">
+						{sortedCategories.length}
+					</div>
+					<div class="text-sm text-gray-400">Categories</div>
+				</div>
+				<div class="bg-gray-800/30 rounded-lg p-4 text-center">
+					<div class="text-2xl font-bold text-purple-400">
+						{new Set(allProjects.map(p => p.year)).size}
+					</div>
+					<div class="text-sm text-gray-400">Years Active</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Projects by Category -->
+		{sortedCategories.map(category => (
+			<section class="mb-12">
+				<div class="flex items-center justify-between mb-6">
+					<h2 class="text-2xl font-bold text-white">
+						{category}
+					</h2>
+					<span class="text-gray-400 text-sm">
+						{projectsByCategory[category].length} {projectsByCategory[category].length === 1 ? 'project' : 'projects'}
+					</span>
+				</div>
+				<div class="space-y-2">
+					{projectsByCategory[category].map(project => (
+						<div class="group">
+							<a href={project.href} class="block p-4 bg-gray-800/50 hover:bg-gray-800/80 rounded-lg transition-colors">
+								<div class="flex items-center justify-between">
+									<div class="flex-1">
+										<div class="flex items-center gap-3 mb-2">
+											<h3 class="text-white font-medium group-hover:text-gray-300 transition-colors">
+												{project.title}
+											</h3>
+											<span class={`px-2 py-1 text-xs rounded border ${getStatusStyle(project.status)}`}>
+												{getStatusText(project.status)}
+											</span>
+											<span class="text-gray-500 text-xs">
+												{project.year}
+											</span>
+										</div>
+										<p class="text-gray-400 text-sm">
+											{project.description}
+										</p>
+									</div>
+									<div class="ml-4 text-gray-400 group-hover:text-white transition-colors">
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+										</svg>
+									</div>
+								</div>
+							</a>
+						</div>
+					))}
+				</div>
+			</section>
+		))}
+	</main>
+</Layout>

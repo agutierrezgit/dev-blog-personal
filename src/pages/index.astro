@@ -1,16 +1,151 @@
 ---
+import Header from "../components/Header.astro"
+import Layout from "../layouts/Layout.astro"
+import ListItem from "../components/ListItem.astro"
+
+const latestPosts = [
+	{
+		title: "Getting started",
+		description: "Hit the ground running.",
+		href: "/posts/getting-started"
+	},
+	{
+		title: "Blog Collection",
+		description: "How to add posts to your blog.",
+		href: "/posts/blog-collection"
+	},
+	{
+		title: "Projects Collection",
+		description: "How to add projects to your portfolio.",
+		href: "/posts/projects-collection"
+	}
+];
+const workExperience = [
+	{
+		company: "Google",
+		role: "Software Engineer",
+		period: "Nov2022 - Current",
+		description: "Sit amet consectetur adipiscing elit, lure illo neque tempora, voluptatem est quaerat voluptas praesentium ipsa dolorem dignissimos nulla ratione distinctio quae maiores eligendi nostrum? Quibusdam, debitis voluptatum, lorem ipsum dolor."
+	},
+	{
+		company: "Apple",
+		role: "Software Engineer",
+		period: "Jan2020 - Nov2022",
+		description: "Voluptatem est quaerat voluptas praesentium ipsa dolorem dignissimos nulla ratione distinctio quae maiores eligendi nostrum? Quibusdam, debitis voluptatum, lorem ipsum dolor. Sit amet consectetur adipiscing elit, lure illo neque tempora."
+	}
+]
+
+const recentProjects = [
+	{
+		title: "React Dashboard Pro",
+		description: "Advanced analytics dashboard with real-time data visualization and interactive charts.",
+		href: "/projects/react-dashboard-pro"
+	},
+	{
+		title: "AI Content Generator",
+		description: "Machine learning powered content generation tool for blog posts and articles.",
+		href: "/projects/ai-content-generator"
+	}
+]
 
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Ceadria - Frontend Developer & AI Enthusiast">
+	<Header />
+	
+	<main class="max-w-4xl mx-auto px-6 py-12">
+		<!-- Hero/Intro Section -->
+		<section class="mb-16">
+			<h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+				Hi, I'm Adrian 👋
+			</h1>
+			<div class="space-y-4 text-gray-300 leading-relaxed">
+				<p>
+					Welcome to <strong class="text-white">Ceadria</strong>, my personal space where I share insights about frontend development, AI, and modern web technologies. I'm passionate about creating exceptional user experiences and exploring the intersection of design and technology.
+				</p>
+				<p>
+					As a software engineer with years of experience at top tech companies, I love diving deep into React, TypeScript, and cutting-edge web frameworks. I also explore AI tools and how they're revolutionizing the way we build software.
+				</p>
+				<p>
+					Feel free to explore my <a href="/posts" class="text-blue-400 hover:text-blue-300 transition-colors">blog posts</a>, check out my <a href="/projects" class="text-blue-400 hover:text-blue-300 transition-colors">projects</a>, or learn more about my <a href="/work" class="text-blue-400 hover:text-blue-300 transition-colors">professional journey</a>.
+				</p>
+			</div>
+		</section>
+
+		<!-- Latest Posts Section -->
+		<section class="mb-16">
+			<div class="flex items-center justify-between mb-8">
+				<h2 class="text-2xl font-bold text-white">
+					Latest posts
+				</h2>
+				<a href="/posts" class="text-blue-400 hover:text-blue-300 text-sm transition-colors">
+					See all posts
+				</a>
+			</div>
+			<div class="space-y-2">
+				{latestPosts.map((post) => (
+					<ListItem 
+						title={post.title}
+						description={post.description}
+						href={post.href}
+					/>
+				))}
+			</div>
+		</section>
+
+		<!-- Work Experience Section -->
+		<section class="mb-16">
+			<div class="flex items-center justify-between mb-8">
+				<h2 class="text-2xl font-bold text-white">
+					Work Experience
+				</h2>
+				<a href="/work" class="text-blue-400 hover:text-blue-300 text-sm transition-colors">
+					See all work
+				</a>
+			</div>
+			<div class="space-y-8">
+				{workExperience.map((job) => (
+					<div class="space-y-3">
+						<div class="flex items-start justify-between">
+							<div>
+								<h3 class="text-lg font-semibold text-white">
+									{job.company}
+								</h3>
+								<p class="text-gray-400 text-sm">
+									{job.role}
+								</p>
+							</div>
+							<span class="text-gray-400 text-sm font-medium whitespace-nowrap">
+								{job.period}
+							</span>
+						</div>
+						<p class="text-gray-300 text-sm leading-relaxed">
+							{job.description}
+						</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<!-- Recent Projects Section -->
+		<section class="mb-16">
+			<div class="flex items-center justify-between mb-8">
+				<h2 class="text-2xl font-bold text-white">
+					Recent projects
+				</h2>
+				<a href="/projects" class="text-blue-400 hover:text-blue-300 text-sm transition-colors">
+					See all projects
+				</a>
+			</div>
+			<div class="space-y-2">
+				{recentProjects.map((project) => (
+					<ListItem 
+						title={project.title}
+						description={project.description}
+						href={project.href}
+					/>
+				))}
+			</div>
+		</section>
+	</main>
+</Layout>
