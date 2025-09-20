@@ -17,11 +17,11 @@ interface WorkExperience {
 
 const workHistory: WorkExperience[] = [
 	{
-		company: "Google",
+		company: "Freepik",
 		role: "Senior Software Engineer",
-		startDate: "2022-11-01",
+		startDate: "2025-06-02",
 		endDate: null, // Current job
-		location: "Mountain View, CA",
+		location: "Málaga (Remote)",
 		description: [
 			"Lead frontend development for Google Cloud Console, serving millions of enterprise users daily.",
 			"Architected and implemented a new design system that reduced development time by 40% across 15+ product teams.",
@@ -35,14 +35,14 @@ const workHistory: WorkExperience[] = [
 			"Reduced bug reports by 45% through implementation of comprehensive testing strategy",
 			"Received 'Exceptional Impact' performance rating for 2 consecutive years"
 		],
-		companySize: "100,000+ employees",
-		industry: "Technology"
+		companySize: "500+ employees",
+		industry: "AI Tools for Audivisual content"
 	},
 	{
-		company: "Apple",
-		role: "Software Engineer II",
-		startDate: "2020-01-15",
-		endDate: "2022-10-31",
+       company: "Expero Inc.",
+		role: "Senior Frontend Engineer",
+		startDate: "2022-07-01",
+		endDate: "2024-05-31",
 		location: "Cupertino, CA",
 		description: [
 			"Developed user-facing features for Apple's internal developer tools used by 50,000+ iOS developers.",
@@ -61,11 +61,11 @@ const workHistory: WorkExperience[] = [
 		industry: "Technology"
 	},
 	{
-		company: "Stripe",
-		role: "Frontend Engineer",
-		startDate: "2018-06-01",
-		endDate: "2019-12-31",
-		location: "San Francisco, CA",
+		company: "Expero Inc.",
+		role: "Intermediate Frontend Engineer",
+		startDate: "2021-07-01",
+		endDate: "2022-07-01",
+		location: "Texas (Remote)",
 		description: [
 			"Built and maintained Stripe Dashboard used by 1M+ businesses worldwide.",
 			"Developed payment flow components handling billions of dollars in transactions.",
@@ -83,11 +83,11 @@ const workHistory: WorkExperience[] = [
 		industry: "FinTech"
 	},
 	{
-		company: "Airbnb",
+		company: "ChaingoTech",
 		role: "Junior Software Engineer",
-		startDate: "2017-08-01",
-		endDate: "2018-05-31",
-		location: "San Francisco, CA",
+		startDate: "2019-10-01",
+		endDate: "2021-06-31",
+		location: "Madrid",
 		description: [
 			"Developed features for Airbnb's host dashboard and listing management tools.",
 			"Worked on search and discovery features to improve property matching algorithms.",
@@ -101,8 +101,8 @@ const workHistory: WorkExperience[] = [
 			"Contributed to design system adoption across 5 product teams",
 			"Completed internal bootcamp program with top 10% performance"
 		],
-		companySize: "5,000+ employees",
-		industry: "Travel Technology"
+		companySize: "10+ employees",
+		industry: "Web apps for logistic"
 	}
 ]
 
@@ -147,7 +147,7 @@ const experience = calculateExperience()
 const allTechnologies = [...new Set(workHistory.flatMap(job => job.technologies))]
 ---
 
-<Layout title="Work Experience - Ceadria">
+<Layout title="Work Experience - learnfromcode">
 	<Header />
 	
 	<main class="max-w-4xl mx-auto px-6 py-12">

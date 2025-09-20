@@ -1,0 +1,319 @@
+---
+import Header from "../components/Header.astro"
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout title="Pricing - learnfromcode">
+	<Header />
+	
+	<main class="bg-white dark:bg-gray-900 transition-colors">
+		<!-- Hero Section -->
+		<section class="max-w-6xl mx-auto px-6 py-20">
+			<div class="text-center mb-16">
+				<h1 class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+					Simple, Transparent Pricing
+				</h1>
+				<p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
+					Choose the plan that fits your learning goals. All plans include access to our growing library of code analysis.
+				</p>
+				
+				<!-- Billing Toggle -->
+				<div class="inline-flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-1 mb-12">
+					<button id="monthly" class="px-6 py-2 rounded-md text-sm font-medium transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow">
+						Monthly
+					</button>
+					<button id="yearly" class="px-6 py-2 rounded-md text-sm font-medium transition-colors text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+						Yearly <span class="text-green-600 dark:text-green-400 text-xs font-bold ml-1">Save 20%</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Pricing Cards -->
+			<div class="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+				<!-- Free Tier -->
+				<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 relative">
+					<div class="mb-8">
+						<h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Explorer</h3>
+						<p class="text-gray-600 dark:text-gray-400 mb-6">Perfect for getting started with code analysis</p>
+						<div class="flex items-baseline">
+							<span class="text-4xl font-bold text-gray-900 dark:text-white">Free</span>
+							<span class="text-gray-500 dark:text-gray-400 ml-1">forever</span>
+						</div>
+					</div>
+					
+					<ul class="space-y-4 mb-8">
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-green-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">2 analysis posts per month</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-green-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Weekly newsletter</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-green-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Basic code patterns</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-green-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7-293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Community access</span>
+						</li>
+					</ul>
+					
+					<button class="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-3 px-6 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
+						Get Started Free
+					</button>
+				</div>
+
+				<!-- Pro Tier -->
+				<div class="bg-white dark:bg-gray-800 border-2 border-blue-500 rounded-2xl p-8 relative">
+					<div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+						<span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">Most Popular</span>
+					</div>
+					
+					<div class="mb-8">
+						<h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Pro Developer</h3>
+						<p class="text-gray-600 dark:text-gray-400 mb-6">For developers who want deep technical insights</p>
+						<div class="flex items-baseline">
+							<span class="text-4xl font-bold text-gray-900 dark:text-white">
+								<span id="pro-price">$19</span>
+							</span>
+							<span class="text-gray-500 dark:text-gray-400 ml-1">/month</span>
+						</div>
+						<p class="text-sm text-green-600 dark:text-green-400 mt-1" id="pro-savings" style="display: none;">
+							Save $46/year with yearly billing
+						</p>
+					</div>
+					
+					<ul class="space-y-4 mb-8">
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-blue-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300"><strong>Everything in Explorer</strong></span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-blue-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Weekly deep-dive analysis</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-blue-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Exclusive code deep-dives</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-blue-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Searchable pattern library</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-blue-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Early access to new content</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-blue-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Priority email support</span>
+						</li>
+					</ul>
+					
+					<button class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+						Start Pro Trial
+					</button>
+					<p class="text-center text-gray-500 dark:text-gray-400 text-sm mt-3">7-day free trial, cancel anytime</p>
+				</div>
+
+				<!-- Mastermind Tier -->
+				<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 relative">
+					<div class="mb-8">
+						<h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Mastermind</h3>
+						<p class="text-gray-600 dark:text-gray-400 mb-6">For teams and senior developers who want it all</p>
+						<div class="flex items-baseline">
+							<span class="text-4xl font-bold text-gray-900 dark:text-white">
+								<span id="mastermind-price">$49</span>
+							</span>
+							<span class="text-gray-500 dark:text-gray-400 ml-1">/month</span>
+						</div>
+						<p class="text-sm text-green-600 dark:text-green-400 mt-1" id="mastermind-savings" style="display: none;">
+							Save $118/year with yearly billing
+						</p>
+					</div>
+					
+					<ul class="space-y-4 mb-8">
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-purple-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300"><strong>Everything in Pro</strong></span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-purple-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Monthly live code reviews</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-purple-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Request specific libraries</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-purple-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Private Discord community</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-purple-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">1-on-1 monthly office hours</span>
+						</li>
+						<li class="flex items-start">
+							<svg class="w-5 h-5 text-purple-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700 dark:text-gray-300">Custom code reviews</span>
+						</li>
+					</ul>
+					
+					<button class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-purple-700 transition-colors">
+						Join Mastermind
+					</button>
+					<p class="text-center text-gray-500 dark:text-gray-400 text-sm mt-3">14-day free trial, cancel anytime</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- FAQ Section -->
+		<section class="bg-gray-50 dark:bg-gray-800/50 py-20">
+			<div class="max-w-4xl mx-auto px-6">
+				<div class="text-center mb-12">
+					<h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+						Frequently Asked Questions
+					</h2>
+				</div>
+				
+				<div class="space-y-8">
+					<div class="bg-white dark:bg-gray-800 rounded-lg p-6">
+						<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+							What if I'm not satisfied with my subscription?
+						</h3>
+						<p class="text-gray-600 dark:text-gray-400">
+							We offer a 30-day money-back guarantee. If you're not completely satisfied, we'll refund your payment, no questions asked.
+						</p>
+					</div>
+					
+					<div class="bg-white dark:bg-gray-800 rounded-lg p-6">
+						<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+							How often is new content published?
+						</h3>
+						<p class="text-gray-600 dark:text-gray-400">
+							Free users get 2 analysis posts per month. Pro subscribers get weekly deep-dives, and Mastermind members get exclusive bonus content and early access.
+						</p>
+					</div>
+					
+					<div class="bg-white dark:bg-gray-800 rounded-lg p-6">
+						<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+							Can I cancel my subscription anytime?
+						</h3>
+						<p class="text-gray-600 dark:text-gray-400">
+							Yes! You can cancel your subscription at any time. You'll continue to have access until the end of your billing period.
+						</p>
+					</div>
+					
+					<div class="bg-white dark:bg-gray-800 rounded-lg p-6">
+						<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+							Do you offer team plans?
+						</h3>
+						<p class="text-gray-600 dark:text-gray-400">
+							Yes! Contact us for custom team pricing. We offer discounts for teams of 5 or more developers.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="bg-gradient-to-r from-blue-600 to-purple-600 py-20">
+			<div class="max-w-4xl mx-auto px-6 text-center">
+				<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+					Ready to Level Up Your Code?
+				</h2>
+				<p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+					Join 1,200+ developers learning from the best open source libraries. 
+					Start your journey today with a free trial.
+				</p>
+				
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<button class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-colors">
+						Start Free Trial
+					</button>
+					<a href="/analysis" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors">
+						View Sample Analysis
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<script>
+	// Pricing toggle functionality
+	const monthlyBtn = document.getElementById('monthly');
+	const yearlyBtn = document.getElementById('yearly');
+	const proPrice = document.getElementById('pro-price');
+	const mastermindPrice = document.getElementById('mastermind-price');
+	const proSavings = document.getElementById('pro-savings');
+	const mastermindSavings = document.getElementById('mastermind-savings');
+	
+	yearlyBtn?.addEventListener('click', () => {
+		// Switch to yearly
+		monthlyBtn?.classList.remove('bg-white', 'dark:bg-gray-700', 'text-gray-900', 'dark:text-white', 'shadow');
+		monthlyBtn?.classList.add('text-gray-600', 'dark:text-gray-400');
+		
+		yearlyBtn?.classList.add('bg-white', 'dark:bg-gray-700', 'text-gray-900', 'dark:text-white', 'shadow');
+		yearlyBtn?.classList.remove('text-gray-600', 'dark:text-gray-400');
+		
+		// Update prices
+		if (proPrice) proPrice.textContent = '$15';
+		if (mastermindPrice) mastermindPrice.textContent = '$39';
+		
+		// Show savings
+		if (proSavings) proSavings.style.display = 'block';
+		if (mastermindSavings) mastermindSavings.style.display = 'block';
+	});
+	
+	monthlyBtn?.addEventListener('click', () => {
+		// Switch to monthly
+		yearlyBtn?.classList.remove('bg-white', 'dark:bg-gray-700', 'text-gray-900', 'dark:text-white', 'shadow');
+		yearlyBtn?.classList.add('text-gray-600', 'dark:text-gray-400');
+		
+		monthlyBtn?.classList.add('bg-white', 'dark:bg-gray-700', 'text-gray-900', 'dark:text-white', 'shadow');
+		monthlyBtn?.classList.remove('text-gray-600', 'dark:text-gray-400');
+		
+		// Update prices
+		if (proPrice) proPrice.textContent = '$19';
+		if (mastermindPrice) mastermindPrice.textContent = '$49';
+		
+		// Hide savings
+		if (proSavings) proSavings.style.display = 'none';
+		if (mastermindSavings) mastermindSavings.style.display = 'none';
+	});
+</script>

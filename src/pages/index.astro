@@ -3,149 +3,240 @@ import Header from "../components/Header.astro"
 import Layout from "../layouts/Layout.astro"
 import ListItem from "../components/ListItem.astro"
 
-const latestPosts = [
-	{
-		title: "Getting started",
-		description: "Hit the ground running.",
-		href: "/posts/getting-started"
-	},
-	{
-		title: "Blog Collection",
-		description: "How to add posts to your blog.",
-		href: "/posts/blog-collection"
-	},
-	{
-		title: "Projects Collection",
-		description: "How to add projects to your portfolio.",
-		href: "/posts/projects-collection"
-	}
-];
-const workExperience = [
-	{
-		company: "Google",
-		role: "Software Engineer",
-		period: "Nov2022 - Current",
-		description: "Sit amet consectetur adipiscing elit, lure illo neque tempora, voluptatem est quaerat voluptas praesentium ipsa dolorem dignissimos nulla ratione distinctio quae maiores eligendi nostrum? Quibusdam, debitis voluptatum, lorem ipsum dolor."
-	},
-	{
-		company: "Apple",
-		role: "Software Engineer",
-		period: "Jan2020 - Nov2022",
-		description: "Voluptatem est quaerat voluptas praesentium ipsa dolorem dignissimos nulla ratione distinctio quae maiores eligendi nostrum? Quibusdam, debitis voluptatum, lorem ipsum dolor. Sit amet consectetur adipiscing elit, lure illo neque tempora."
-	}
-]
-
-const recentProjects = [
-	{
-		title: "React Dashboard Pro",
-		description: "Advanced analytics dashboard with real-time data visualization and interactive charts.",
-		href: "/projects/react-dashboard-pro"
-	},
-	{
-		title: "AI Content Generator",
-		description: "Machine learning powered content generation tool for blog posts and articles.",
-		href: "/projects/ai-content-generator"
-	}
-]
+// Product-focused landing page
 
 ---
 
-<Layout title="Ceadria - Frontend Developer & AI Enthusiast">
+<Layout title="learnfromcode - Learn from the best open source code">
 	<Header />
 	
-	<main class="max-w-4xl mx-auto px-6 py-12">
-		<!-- Hero/Intro Section -->
-		<section class="mb-16">
-			<h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-				Hi, I'm Adrian 👋
-			</h1>
-			<div class="space-y-4 text-gray-300 leading-relaxed">
-				<p>
-					Welcome to <strong class="text-white">Ceadria</strong>, my personal space where I share insights about frontend development, AI, and modern web technologies. I'm passionate about creating exceptional user experiences and exploring the intersection of design and technology.
+	<main class="bg-white dark:bg-gray-900 transition-colors">
+		<!-- Hero Section -->
+		<section class="max-w-6xl mx-auto px-6 py-20">
+			<div class="text-center mb-12">
+				<h1 class="text-6xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6">
+					Learn from <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Code</span>
+				</h1>
+				<p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+					Discover the patterns, techniques, and insights hidden in the world's best open source libraries. 
+					Every week, we analyze real code from top developers.
 				</p>
-				<p>
-					As a software engineer with years of experience at top tech companies, I love diving deep into React, TypeScript, and cutting-edge web frameworks. I also explore AI tools and how they're revolutionizing the way we build software.
-				</p>
-				<p>
-					Feel free to explore my <a href="/posts" class="text-blue-400 hover:text-blue-300 transition-colors">blog posts</a>, check out my <a href="/projects" class="text-blue-400 hover:text-blue-300 transition-colors">projects</a>, or learn more about my <a href="/work" class="text-blue-400 hover:text-blue-300 transition-colors">professional journey</a>.
-				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+					<a href="/pricing" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-flex items-center">
+						Start Free Trial
+						<svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</a>
+					<a href="/analysis" class="border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
+						View Sample Analysis
+					</a>
+				</div>
+			</div>
+			
+			<!-- Stats Section -->
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+				<div class="text-center">
+					<div class="text-3xl md:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">15+</div>
+					<div class="text-gray-600 dark:text-gray-400 text-sm">Libraries Analyzed</div>
+				</div>
+				<div class="text-center">
+					<div class="text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-2">50+</div>
+					<div class="text-gray-600 dark:text-gray-400 text-sm">Patterns Discovered</div>
+				</div>
+				<div class="text-center">
+					<div class="text-3xl md:text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">1.2k+</div>
+					<div class="text-gray-600 dark:text-gray-400 text-sm">Developers Learning</div>
+				</div>
+				<div class="text-center">
+					<div class="text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">32min</div>
+					<div class="text-gray-600 dark:text-gray-400 text-sm">Avg. Read Time</div>
+				</div>
 			</div>
 		</section>
-
-		<!-- Latest Posts Section -->
-		<section class="mb-16">
-			<div class="flex items-center justify-between mb-8">
-				<h2 class="text-2xl font-bold text-white">
-					Latest posts
-				</h2>
-				<a href="/posts" class="text-blue-400 hover:text-blue-300 text-sm transition-colors">
-					See all posts
-				</a>
-			</div>
-			<div class="space-y-2">
-				{latestPosts.map((post) => (
-					<ListItem 
-						title={post.title}
-						description={post.description}
-						href={post.href}
-					/>
-				))}
-			</div>
-		</section>
-
-		<!-- Work Experience Section -->
-		<section class="mb-16">
-			<div class="flex items-center justify-between mb-8">
-				<h2 class="text-2xl font-bold text-white">
-					Work Experience
-				</h2>
-				<a href="/work" class="text-blue-400 hover:text-blue-300 text-sm transition-colors">
-					See all work
-				</a>
-			</div>
-			<div class="space-y-8">
-				{workExperience.map((job) => (
-					<div class="space-y-3">
-						<div class="flex items-start justify-between">
-							<div>
-								<h3 class="text-lg font-semibold text-white">
-									{job.company}
-								</h3>
-								<p class="text-gray-400 text-sm">
-									{job.role}
-								</p>
-							</div>
-							<span class="text-gray-400 text-sm font-medium whitespace-nowrap">
-								{job.period}
-							</span>
+		
+		<!-- How it works -->
+		<section class="bg-gray-50 dark:bg-gray-800/50 py-20">
+			<div class="max-w-6xl mx-auto px-6">
+				<div class="text-center mb-16">
+					<h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+						How It Works
+					</h2>
+					<p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						We dive deep into popular open source libraries to extract actionable insights
+					</p>
+				</div>
+				
+				<div class="grid md:grid-cols-3 gap-8">
+					<div class="text-center">
+						<div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+							<span class="text-white text-2xl font-bold">1</span>
 						</div>
-						<p class="text-gray-300 text-sm leading-relaxed">
-							{job.description}
+						<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Select & Analyze</h3>
+						<p class="text-gray-600 dark:text-gray-400">
+							We choose popular libraries with excellent code quality and dive deep into their source code
 						</p>
 					</div>
-				))}
+					<div class="text-center">
+						<div class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+							<span class="text-white text-2xl font-bold">2</span>
+						</div>
+						<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Extract Patterns</h3>
+						<p class="text-gray-600 dark:text-gray-400">
+							Identify clever techniques, design patterns, and architectural decisions that make the code excellent
+						</p>
+					</div>
+					<div class="text-center">
+						<div class="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+							<span class="text-white text-2xl font-bold">3</span>
+						</div>
+						<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Apply & Learn</h3>
+						<p class="text-gray-600 dark:text-gray-400">
+							Learn how to apply these patterns in your own projects with practical examples and use cases
+						</p>
+					</div>
+				</div>
 			</div>
 		</section>
-
-		<!-- Recent Projects Section -->
-		<section class="mb-16">
-			<div class="flex items-center justify-between mb-8">
-				<h2 class="text-2xl font-bold text-white">
-					Recent projects
+		
+		<!-- Featured Analysis Section -->
+		<section class="max-w-6xl mx-auto px-6 py-20">
+			<div class="text-center mb-12">
+				<h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+					Latest Analysis
 				</h2>
-				<a href="/projects" class="text-blue-400 hover:text-blue-300 text-sm transition-colors">
-					See all projects
+				<p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+					Dive deep into the code that powers your favorite libraries
+				</p>
+			</div>
+			
+			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow">
+					<div class="flex items-center gap-2 mb-4">
+						<span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-2 py-1 text-xs rounded font-medium">react-use-wizard</span>
+						<span class="text-gray-500 dark:text-gray-400 text-xs">8 min read</span>
+					</div>
+					<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+						<a href="/analysis/react-use-wizard-patterns" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+							Compound Components Done Right
+						</a>
+					</h3>
+					<p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+						5 clever patterns from react-use-wizard that every React developer should know.
+					</p>
+					<div class="flex flex-wrap gap-1">
+						<span class="text-blue-600 dark:text-blue-400 text-xs">#react</span>
+						<span class="text-blue-600 dark:text-blue-400 text-xs">#hooks</span>
+						<span class="text-blue-600 dark:text-blue-400 text-xs">#patterns</span>
+					</div>
+				</div>
+				
+				<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow">
+					<div class="flex items-center gap-2 mb-4">
+						<span class="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-2 py-1 text-xs rounded font-medium">zustand</span>
+						<span class="text-gray-500 dark:text-gray-400 text-xs">Coming Soon</span>
+					</div>
+					<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+						The Magic Behind Zustand's API
+					</h3>
+					<p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+						How Zustand creates such a clean state management experience with minimal boilerplate.
+					</p>
+					<div class="flex flex-wrap gap-1">
+						<span class="text-blue-600 dark:text-blue-400 text-xs">#state</span>
+						<span class="text-blue-600 dark:text-blue-400 text-xs">#typescript</span>
+					</div>
+				</div>
+				
+				<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow">
+					<div class="flex items-center gap-2 mb-4">
+						<span class="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 px-2 py-1 text-xs rounded font-medium">use-debounce</span>
+						<span class="text-gray-500 dark:text-gray-400 text-xs">Coming Soon</span>
+					</div>
+					<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+						Perfect Performance Optimization
+					</h3>
+					<p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+						The optimization techniques that make use-debounce lightning fast.
+					</p>
+					<div class="flex flex-wrap gap-1">
+						<span class="text-blue-600 dark:text-blue-400 text-xs">#performance</span>
+						<span class="text-blue-600 dark:text-blue-400 text-xs">#optimization</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+				<a href="/pricing" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+					Upgrade for More
+					<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+					</svg>
+				</a>
+				<a href="/analysis" class="inline-flex items-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
+					View All Analysis
 				</a>
 			</div>
-			<div class="space-y-2">
-				{recentProjects.map((project) => (
-					<ListItem 
-						title={project.title}
-						description={project.description}
-						href={project.href}
-					/>
-				))}
+		</section>
+		
+		<!-- Newsletter Section -->
+		<section id="newsletter" class="bg-gradient-to-r from-blue-600 to-indigo-600 py-20">
+			<div class="max-w-4xl mx-auto px-6 text-center">
+				<h2 class="text-4xl font-bold text-white mb-6">
+					Get Weekly Code Analysis
+				</h2>
+				<p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+					Join 1,200+ developers learning from the best open source code. 
+					New deep-dive analysis delivered every Tuesday.
+				</p>
+				
+				<div class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-6">
+					<input 
+						type="email" 
+						placeholder="Enter your email address"
+						class="flex-1 px-6 py-4 rounded-lg border-0 text-gray-900 text-lg focus:ring-4 focus:ring-blue-300/50"
+					>
+					<button class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-colors whitespace-nowrap">
+						Subscribe Free
+					</button>
+				</div>
+				
+				<p class="text-blue-200 text-sm">
+					✓ No spam, ever  ✓ Unsubscribe anytime  ✓ Created by developers, for developers
+				</p>
 			</div>
 		</section>
+		
+		<!-- Footer -->
+		<footer class="bg-gray-900 dark:bg-gray-950 text-gray-400 py-12">
+			<div class="max-w-6xl mx-auto px-6">
+				<div class="grid md:grid-cols-3 gap-8">
+					<div>
+						<h3 class="text-white font-semibold mb-4">learnfromcode</h3>
+						<p class="text-sm">
+							Learn from the best open source libraries through detailed code analysis and pattern exploration.
+						</p>
+					</div>
+					<div>
+						<h4 class="text-white font-medium mb-4">Content</h4>
+						<ul class="space-y-2 text-sm">
+							<li><a href="/analysis" class="hover:text-white transition-colors">Code Analysis</a></li>
+							<li><a href="#newsletter" class="hover:text-white transition-colors">Newsletter</a></li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="text-white font-medium mb-4">About</h4>
+						<ul class="space-y-2 text-sm">
+							<li><a href="/about" class="hover:text-white transition-colors">About the Creator</a></li>
+							<li><a href="/work" class="hover:text-white transition-colors">Experience</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="border-t border-gray-800 mt-12 pt-8 text-center text-sm">
+					<p>&copy; 2025 learnfromcode. Made with ❤️ for the developer community.</p>
+				</div>
+			</div>
+		</footer>
 	</main>
 </Layout>
