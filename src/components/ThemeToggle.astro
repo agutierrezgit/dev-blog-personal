@@ -3,15 +3,13 @@
 ---
 
 <button 
-  id="theme-toggle" 
-  class="hidden relative inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
+  class="theme-toggle-btn relative inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
   aria-label="Toggle theme"
   type="button"
 >
   <!-- Sun Icon (Light Mode) -->
   <svg 
-    id="sun-icon" 
-    class="w-5 h-5 text-yellow-500 transition-all duration-300 absolute transform scale-0 rotate-90 opacity-0"
+    class="sun-icon w-5 h-5 text-yellow-500 transition-all duration-300 absolute transform scale-0 rotate-90 opacity-0"
     fill="currentColor" 
     viewBox="0 0 24 24"
   >
@@ -20,8 +18,7 @@
   
   <!-- Moon Icon (Dark Mode) -->
   <svg 
-    id="moon-icon" 
-    class="w-5 h-5 text-blue-400 transition-all duration-300 absolute transform scale-100 rotate-0 opacity-100"
+    class="moon-icon w-5 h-5 text-blue-400 transition-all duration-300 absolute transform scale-100 rotate-0 opacity-100"
     fill="currentColor" 
     viewBox="0 0 24 24"
   >
@@ -41,58 +38,69 @@
     document.documentElement.classList.remove('dark');
   }
   
+  // Function to update all theme toggle instances
+  function updateAllToggleIcons(isDark) {
+    const sunIcons = document.querySelectorAll('.sun-icon');
+    const moonIcons = document.querySelectorAll('.moon-icon');
+    
+    if (isDark) {
+      // Show moon icons, hide sun icons
+      sunIcons.forEach(sunIcon => {
+        sunIcon.classList.remove('scale-100', 'rotate-0', 'opacity-100');
+        sunIcon.classList.add('scale-0', 'rotate-90', 'opacity-0');
+      });
+      moonIcons.forEach(moonIcon => {
+        moonIcon.classList.remove('scale-0', 'rotate-90', 'opacity-0');
+        moonIcon.classList.add('scale-100', 'rotate-0', 'opacity-100');
+      });
+    } else {
+      // Show sun icons, hide moon icons
+      moonIcons.forEach(moonIcon => {
+        moonIcon.classList.remove('scale-100', 'rotate-0', 'opacity-100');
+        moonIcon.classList.add('scale-0', 'rotate-90', 'opacity-0');
+      });
+      sunIcons.forEach(sunIcon => {
+        sunIcon.classList.remove('scale-0', 'rotate-90', 'opacity-0');
+        sunIcon.classList.add('scale-100', 'rotate-0', 'opacity-100');
+      });
+    }
+  }
+  
   // Wait for DOM to be ready
   function initThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const sunIcon = document.getElementById('sun-icon');
-    const moonIcon = document.getElementById('moon-icon');
+    const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
     
-    if (!themeToggle || !sunIcon || !moonIcon) {
+    if (themeToggleBtns.length === 0) {
       setTimeout(initThemeToggle, 10);
       return;
     }
     
-    // Function to update icons
-    function updateIcons(isDark) {
-      console.log('Updating icons, isDark:', isDark); // Debug log
-      if (isDark) {
-        // Show moon icon
-        sunIcon.classList.remove('scale-100', 'rotate-0', 'opacity-100');
-        sunIcon.classList.add('scale-0', 'rotate-90', 'opacity-0');
-        moonIcon.classList.remove('scale-0', 'rotate-90', 'opacity-0');
-        moonIcon.classList.add('scale-100', 'rotate-0', 'opacity-100');
-      } else {
-        // Show sun icon
-        moonIcon.classList.remove('scale-100', 'rotate-0', 'opacity-100');
-        moonIcon.classList.add('scale-0', 'rotate-90', 'opacity-0');
-        sunIcon.classList.remove('scale-0', 'rotate-90', 'opacity-0');
-        sunIcon.classList.add('scale-100', 'rotate-0', 'opacity-100');
-      }
-    }
-    
     // Set initial icon state
     const isDarkMode = document.documentElement.classList.contains('dark');
-    updateIcons(isDarkMode);
+    updateAllToggleIcons(isDarkMode);
     
-    // Add click handler
-    themeToggle.addEventListener('click', function() {
-      console.log('Theme toggle clicked!'); // Debug log
-      const currentlyDark = document.documentElement.classList.contains('dark');
-      
-      if (currentlyDark) {
-        // Switch to light mode
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-        updateIcons(false);
-        console.log('Switched to light mode');
-      } else {
-        // Switch to dark mode
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-        updateIcons(true);
-        console.log('Switched to dark mode');
-      }
+    // Add click handler to all toggle buttons
+    themeToggleBtns.forEach(themeToggle => {
+      // Remove existing listeners to prevent duplicates
+      themeToggle.removeEventListener('click', handleThemeToggle);
+      themeToggle.addEventListener('click', handleThemeToggle);
     });
+  }
+  
+  function handleThemeToggle() {
+    const currentlyDark = document.documentElement.classList.contains('dark');
+    
+    if (currentlyDark) {
+      // Switch to light mode
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      updateAllToggleIcons(false);
+    } else {
+      // Switch to dark mode
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      updateAllToggleIcons(true);
+    }
   }
   
   // Start initialization
